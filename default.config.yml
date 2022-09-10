@@ -1,6 +1,9 @@
 ---
 downloads: ~/.ansible-downloads/
 dotfiles_repo: https://github.com/schmas/dotfiles-v2.git
+dotfiles_github_token:
+git_user_name:
+git_user_email:
 
 homebrew_taps:
   - homebrew/bundle

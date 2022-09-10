@@ -1,4 +1,20 @@
 ---
+- name: Setting Git User Name
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: '{{ git_user_name }}'
+
+- name: Setting Git User Email
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: '{{ git_user_email }}'
+
+# setup 1password cli 
+
 - name: Setup dotfile
-  ansible.builtin.debug:
-    msg: "TODO: implement this"
+  ansible.builtin.expect:
+    command: "chezmoi init --apply https://{{ dotfiles_github_token }}@github.com/schmas/dotfiles-v2.git"
+    responses:
+      Git email address: 
