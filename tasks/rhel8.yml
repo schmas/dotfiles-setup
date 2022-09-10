@@ -1,0 +1,4 @@
+---
+- name: Setup rhel8
+  ansible.builtin.debug:
+    msg: "TODO: implement this"

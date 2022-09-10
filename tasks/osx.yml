@@ -1,0 +1,9 @@
+---
+- name: Setup osx-command-line-tools
+  include_role:
+    name: elliotweiser.osx-command-line-tools
+
+- name: Setup homebrew
+  include_role:
+    name: geerlingguy.mac.homebrew
+  tags: ["homebrew"]

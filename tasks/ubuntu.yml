@@ -1,0 +1,4 @@
+---
+- name: Setup Ubuntu
+  ansible.builtin.debug:
+    msg: "TODO: implement this"

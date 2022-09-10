@@ -1,0 +1,38 @@
+---
+- hosts: all
+
+  vars_files:
+    - default.config.yml
+
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "{{ playbook_dir }}/config.yml"
+      tags: ["always"]
+
+  # roles:
+  #   - role: elliotweiser.osx-command-line-tools
+  #   - role: geerlingguy.mac.homebrew
+  #     tags: ["homebrew"]
+
+  tasks:
+    - import_tasks: tasks/osx.yml
+      when: ansible_facts['os_family']|lower == 'darwin'
+
+    - import_tasks: tasks/ubuntu.yml
+      when: ansible_facts['distribution']|lower == 'ubuntu'
+
+    - import_tasks: tasks/rhel8.yml
+      when: ansible_facts['os_family']|lower == 'redhat'
+
+    - import_tasks: tasks/extra-packages.yml
+      tags: ['extra-packages']
+
+    - block:
+        - name: Run configured post-provision ansible task files.
+          include_tasks: "{{ outer_item }}"
+          loop_control:
+            loop_var: outer_item
+          with_fileglob: "{{ post_provision_tasks|default(omit) }}"
+      tags: ['post']
