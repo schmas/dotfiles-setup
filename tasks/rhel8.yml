@@ -2,3 +2,5 @@
 - name: Setup rhel8
   ansible.builtin.debug:
     msg: "TODO: implement this"
+
+# https://snapcraft.io/install/chezmoi/rhel 
